@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مدرسة الأهلية | صرح العلم والتميز</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #C8A84B;
+  --gold2: #E8D48A;
+  --gold3: #8B6914;
+  --deep: #05050A;
+  --dark1: #0A0A12;
+  --dark2: #0F0F1A;
+  --dark3: #14141E;
+  --dark4: #1A1A28;
+  --text: #F4F0E8;
+  --muted: #7A7570;
+  --muted2: #A09890;
+  --accent: #4A90D9;
+  --green: #3DAA6B;
+  --red: #C94B4B;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+
+/* CUSTOM CURSOR */
+body { cursor: none; }
+.cursor {
+  width: 12px; height: 12px;
+  background: var(--gold);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%,-50%);
+  transition: transform .1s, width .3s, height .3s, background .3s;
+  mix-blend-mode: difference;
+}
+.cursor-ring {
+  width: 36px; height: 36px;
+  border: 1px solid rgba(200,168,75,0.5);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 99998;
+  transform: translate(-50%,-50%);
+  transition: all .12s ease;
+}
+
+body {
+  background: var(--deep);
+  color: var(--text);
+  font-family: 'Tajawal', sans-serif;
+  overflow-x: hidden;
+}
+
+/* NOISE */
+body::after {
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events:none;
+  z-index:9000;
+  opacity:.4;
+}
+
+/* PRELOADER */
+#preloader {
+  position:fixed;inset:0;
+  background:var(--deep);
+  z-index:99000;
+  display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2rem;
+  transition: opacity .8s, visibility .8s;
+}
+#preloader.hide { opacity:0; visibility:hidden; }
+.preloader-emblem {
+  width:100px;height:100px;
+  border:2px solid var(--gold);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:2.5rem;color:var(--gold);
+  font-family:'Playfair Display',serif;
+  animation:emblem-pulse 1.5s ease-in-out infinite;
+}
+@keyframes emblem-pulse {
+  0%,100%{box-shadow:0 0 0 0 rgba(200,168,75,.4),0 0 20px rgba(200,168,75,.2);}
+  50%{box-shadow:0 0 0 20px rgba(200,168,75,0),0 0 40px rgba(200,168,75,.3);}
+}
+.preloader-bar {
+  width:200px;height:2px;background:rgba(200,168,75,.15);border-radius:2px;overflow:hidden;
+}
+.preloader-fill {
+  height:100%;background:linear-gradient(90deg,var(--gold3),var(--gold),var(--gold2));
+  animation:fill-bar 2s ease forwards;
+}
+@keyframes fill-bar{from{width:0}to{width:100%}}
+.preloader-text{font-size:.8rem;letter-spacing:.3em;color:var(--muted);text-transform:uppercase;}
+
+/* NAVBAR */
+nav {
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  padding:0 4%;
+  display:flex;align-items:center;justify-content:space-between;
+  height:75px;
+  background:rgba(5,5,10,0.9);
+  backdrop-filter:blur(30px);
+  border-bottom:1px solid rgba(200,168,75,.12);
+  transition:all .4s;
+}
+nav.scrolled {
+  height:60px;
+  background:rgba(5,5,10,.97);
+  box-shadow:0 4px 30px rgba(0,0,0,.5);
+}
+.nav-logo { display:flex;align-items:center;gap:12px;text-decoration:none; }
+.logo-ring {
+  width:46px;height:46px;border-radius:50%;
+  border:2px solid var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--gold);
+  background:rgba(200,168,75,.06);position:relative;
+}
+.logo-ring::before {
+  content:'';position:absolute;inset:-5px;border-radius:50%;
+  border:1px dashed rgba(200,168,75,.2);
+  animation:spin-ring 15s linear infinite;
+}
+@keyframes spin-ring{to{transform:rotate(360deg);}}
+.logo-name{font-size:1.3rem;font-weight:800;color:var(--gold);letter-spacing:.03em;}
+.logo-tagline{font-size:.65rem;color:var(--muted);letter-spacing:.2em;text-transform:uppercase;margin-top:1px;}
+
+.nav-menu{display:flex;gap:0;list-style:none;}
+.nav-menu li{position:relative;}
+.nav-menu a {
+  display:block;padding:0 1.1rem;height:75px;line-height:75px;
+  color:var(--muted2);font-size:.88rem;font-weight:500;text-decoration:none;
+  letter-spacing:.04em;transition:color .3s;white-space:nowrap;
+}
+nav.scrolled .nav-menu a{height:60px;line-height:60px;}
+.nav-menu a:hover{color:var(--gold);}
+.nav-menu a.active{color:var(--gold);}
+.nav-menu a::after {
+  content:'';position:absolute;bottom:0;left:50%;right:50%;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  transition:left .3s,right .3s;
+}
+.nav-menu a:hover::after,.nav-menu a.active::after{left:10%;right:10%;}
+
+/* DROPDOWN */
+.has-dropdown:hover .dropdown{opacity:1;visibility:visible;transform:translateY(0);}
+.dropdown {
+  position:absolute;top:100%;right:0;min-width:200px;
+  background:rgba(10,10,18,.97);backdrop-filter:blur(20px);
+  border:1px solid rgba(200,168,75,.15);
+  opacity:0;visibility:hidden;transform:translateY(-10px);
+  transition:all .3s;z-index:100;
+}
+.dropdown a {
+  height:auto;line-height:1;padding:1rem 1.5rem;
+  border-bottom:1px solid rgba(200,168,75,.06);display:block;
+  font-size:.82rem;
+}
+.dropdown a:last-child{border-bottom:none;}
+.dropdown a::after{display:none;}
+.dropdown a:hover{background:rgba(200,168,75,.06);padding-right:2rem;}
+
+.nav-cta {
+  padding:.55rem 1.5rem;border:1px solid var(--gold);
+  color:var(--gold)!important;font-weight:700!important;
+  transition:all .3s!important;border-radius:1px;font-size:.82rem!important;
+}
+.nav-cta:hover{background:var(--gold)!important;color:var(--deep)!important;}
+.nav-cta::after{display:none!important;}
+.nav-cta + a{height:auto!important;line-height:1!important;}
+
+/* MOBILE HAMBURGER */
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:5px;}
+.hamburger span{width:24px;height:2px;background:var(--gold);transition:all .3s;display:block;}
+
+/* ==================== HERO ==================== */
+.hero {
+  min-height:100vh;
+  position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+.hero-particles {
+  position:absolute;inset:0;overflow:hidden;
+}
+.particle {
+  position:absolute;width:2px;height:2px;
+  background:var(--gold);border-radius:50%;
+  opacity:0;animation:float-particle var(--dur) var(--delay) ease-in-out infinite;
+}
+@keyframes float-particle {
+  0%{opacity:0;transform:translateY(0) scale(0);}
+  20%{opacity:var(--op);}
+  80%{opacity:var(--op);}
+  100%{opacity:0;transform:translateY(-200px) scale(0);}
+}
+
+.hero-bg-layer {
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 120% 80% at 50% 30%, rgba(200,168,75,.05) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 60% at 10% 80%, rgba(200,168,75,.03) 0%, transparent 50%),
+    radial-gradient(ellipse 40% 40% at 90% 20%, rgba(74,144,217,.03) 0%, transparent 50%),
+    linear-gradient(160deg, #06060E 0%, #080814 50%, #050508 100%);
+}
+
+.hero-grid-lines {
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(200,168,75,.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(200,168,75,.03) 1px,transparent 1px);
+  background-size:80px 80px;
+  mask-image:radial-gradient(ellipse 100% 100% at 50% 50%,black 0%,transparent 75%);
+}
+
+.hero-rings {
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  pointer-events:none;
+}
+.hero-ring {
+  position:absolute;border-radius:50%;border:1px solid rgba(200,168,75,.06);
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  animation:slow-spin var(--speed) linear infinite;
+}
+@keyframes slow-spin{to{transform:translate(-50%,-50%) rotate(360deg);}}
+
+.hero-content {
+  position:relative;z-index:5;text-align:center;max-width:1000px;padding:0 5%;
+}
+
+.hero-year-badge {
+  display:inline-flex;align-items:center;gap:10px;
+  border:1px solid rgba(200,168,75,.25);padding:.4rem 1.2rem;
+  font-size:.68rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);
+  background:rgba(200,168,75,.04);margin-bottom:2.5rem;
+  animation:fade-down .8s ease both;
+}
+.hero-year-badge::before,.hero-year-badge::after{content:'✦';opacity:.5;}
+
+.hero-title {
+  font-size:clamp(3.5rem,10vw,9rem);
+  font-weight:900;line-height:.95;letter-spacing:-.02em;
+  background:linear-gradient(160deg,#ffffff 0%,var(--gold2) 35%,var(--gold) 60%,var(--gold3) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:fade-up .9s .15s ease both;
+  margin-bottom:.5rem;
+}
+.hero-title-en {
+  display:block;font-family:'Playfair Display',serif;
+  font-size:clamp(1rem,2.5vw,1.8rem);font-weight:400;font-style:italic;
+  background:linear-gradient(135deg,var(--gold),rgba(200,168,75,.5));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  letter-spacing:.15em;margin-top:.8rem;
+  animation:fade-up .9s .25s ease both;
+}
+.hero-ornament-line {
+  display:flex;align-items:center;gap:1.5rem;justify-content:center;
+  margin:2rem 0;animation:fade-up .9s .35s ease both;
+}
+.orn-line{flex:1;max-width:120px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
+.orn-line.r{background:linear-gradient(270deg,transparent,var(--gold));}
+.orn-diamond{
+  width:10px;height:10px;background:var(--gold);
+  transform:rotate(45deg);animation:diamond-pulse 2s ease-in-out infinite;
+}
+@keyframes diamond-pulse{0%,100%{box-shadow:0 0 0 0 rgba(200,168,75,.4);}50%{box-shadow:0 0 0 8px rgba(200,168,75,0);}}
+
+.hero-desc {
+  font-size:clamp(.95rem,1.5vw,1.15rem);color:var(--muted2);
+  line-height:1.9;max-width:600px;margin:0 auto 3rem;font-weight:300;
+  animation:fade-up .9s .45s ease both;
+}
+
+.hero-actions {
+  display:flex;gap:1.2rem;justify-content:center;flex-wrap:wrap;
+  animation:fade-up .9s .55s ease both;
+  margin-bottom:3.5rem;
+}
+.btn-gold {
+  padding:.9rem 2.8rem;
+  background:linear-gradient(135deg,var(--gold3),var(--gold),var(--gold2));
+  color:var(--deep);font-weight:800;font-size:.9rem;letter-spacing:.06em;
+  border:none;cursor:pointer;text-decoration:none;
+  clip-path:polygon(14px 0%,100% 0%,calc(100% - 14px) 100%,0% 100%);
+  transition:filter .3s,transform .3s;display:inline-block;text-align:center;
+}
+.btn-gold:hover{filter:brightness(1.2);transform:translateY(-3px);}
+.btn-ghost {
+  padding:.9rem 2.4rem;border:1px solid rgba(200,168,75,.35);
+  color:var(--gold);font-weight:500;font-size:.9rem;text-decoration:none;
+  transition:all .3s;display:inline-block;background:transparent;
+}
+.btn-ghost:hover{border-color:var(--gold);background:rgba(200,168,75,.07);transform:translateY(-3px);}
+
+.hero-stats-row {
+  display:flex;gap:0;justify-content:center;flex-wrap:wrap;
+  animation:fade-up .9s .65s ease both;
+  border-top:1px solid rgba(200,168,75,.1);
+  padding-top:2.5rem;
+}
+.hero-stat {
+  padding:0 2.5rem;border-right:1px solid rgba(200,168,75,.1);text-align:center;
+}
+.hero-stat:last-child{border-right:none;}
+.hero-stat-num{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:900;color:var(--gold);}
+.hero-stat-label{font-size:.7rem;color:var(--muted);letter-spacing:.15em;text-transform:uppercase;margin-top:3px;}
+
+.scroll-cue {
+  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;opacity:.4;
+}
+.scroll-cue span{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);}
+.scroll-cue-line{width:1px;height:60px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scroll-line 2s ease-in-out infinite;}
+@keyframes scroll-line{0%,100%{transform:scaleY(1);opacity:.4;}50%{transform:scaleY(.5);opacity:.8;}}
+
+/* ==================== MARQUEE TICKER ==================== */
+.ticker {
+  background:rgba(200,168,75,.06);
+  border-top:1px solid rgba(200,168,75,.12);
+  border-bottom:1px solid rgba(200,168,75,.12);
+  padding:.7rem 0;overflow:hidden;position:relative;
+}
+.ticker::before,.ticker::after {
+  content:'';position:absolute;top:0;bottom:0;width:100px;z-index:2;
+}
+.ticker::before{left:0;background:linear-gradient(90deg,var(--dark1),transparent);}
+.ticker::after{right:0;background:linear-gradient(270deg,var(--dark1),transparent);}
+.ticker-track {
+  display:flex;gap:4rem;animation:ticker-scroll 30s linear infinite;white-space:nowrap;
+}
+.ticker-item {
+  display:flex;align-items:center;gap:.8rem;
+  font-size:.78rem;color:var(--muted2);letter-spacing:.08em;
+  text-transform:uppercase;flex-shrink:0;
+}
+.ticker-item::before{content:'✦';color:var(--gold);font-size:.6rem;}
+@keyframes ticker-scroll{from{transform:translateX(0);}to{transform:translateX(-50%);}};
+
+/* ==================== SECTION LAYOUT ==================== */
+.section { padding:8rem 5%; }
+.container { max-width:1280px;margin:0 auto; }
+.section-head { margin-bottom:4.5rem; }
+.section-head.center { text-align:center; }
+.badge-label {
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:.68rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);
+  margin-bottom:1rem;
+}
+.badge-label::before{content:'';display:block;width:30px;height:1px;background:var(--gold);}
+.section-title {
+  font-size:clamp(2rem,4vw,3.5rem);font-weight:900;line-height:1.1;
+  color:var(--text);margin-bottom:1rem;
+}
+.section-title .gold-word {
+  background:linear-gradient(135deg,var(--gold2),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.section-sub{font-size:1rem;color:var(--muted);line-height:1.8;font-weight:300;max-width:560px;}
+.section-sub.wide{max-width:700px;}
+
+/* DIVIDER */
+.gold-divider{width:60px;height:3px;background:linear-gradient(90deg,var(--gold3),var(--gold),var(--gold2));margin:1.5rem 0;}
+.gold-divider.center{margin:1.5rem auto;}
+
+/* ==================== ABOUT SPLIT ==================== */
+.about-section{background:var(--dark1);}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;}
+.about-visual-wrap{position:relative;}
+.about-main-visual {
+  aspect-ratio:3/4;
+  background:linear-gradient(135deg,#12121E,#0C0C18);
+  border:1px solid rgba(200,168,75,.15);
+  position:relative;overflow:hidden;
+}
+.about-visual-overlay {
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 25% 25%,rgba(200,168,75,.08) 0%,transparent 60%),
+    radial-gradient(ellipse at 75% 75%,rgba(74,144,217,.05) 0%,transparent 60%);
+}
+.about-visual-icon {
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-55%);
+  font-size:7rem;opacity:.15;
+}
+.about-visual-quote {
+  position:absolute;bottom:2.5rem;left:2rem;right:2rem;
+  font-family:'Playfair Display',serif;font-size:1.1rem;
+  color:var(--gold);font-style:italic;text-align:center;opacity:.7;line-height:1.6;
+}
+.corner-accent {
+  position:absolute;width:40px;height:40px;
+}
+.ca-tl{top:-2px;right:-2px;border-top:2px solid var(--gold);border-right:2px solid var(--gold);}
+.ca-br{bottom:-2px;left:-2px;border-bottom:2px solid var(--gold);border-left:2px solid var(--gold);}
+.about-badge-medal {
+  position:absolute;bottom:-2rem;right:-2rem;
+  width:90px;height:90px;
+  background:linear-gradient(135deg,var(--gold3),var(--gold));
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;color:var(--deep);font-weight:900;
+  text-align:center;font-size:.65rem;letter-spacing:.05em;
+}
+.about-badge-medal strong{font-size:1.6rem;font-family:'Playfair Display',serif;display:block;}
+.floating-cert {
+  position:absolute;top:2rem;left:-3rem;
+  background:var(--dark4);border:1px solid rgba(200,168,75,.2);
+  padding:1rem 1.2rem;min-width:150px;
+  animation:float-cert 4s ease-in-out infinite;
+}
+@keyframes float-cert{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+.cert-icon{font-size:1.5rem;margin-bottom:.4rem;}
+.cert-title{font-size:.72rem;color:var(--gold);font-weight:600;}
+.cert-sub{font-size:.65rem;color:var(--muted);}
+
+.about-pillars{margin-top:2.5rem;display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.pillar-card {
+  padding:1.2rem 1.4rem;
+  background:rgba(200,168,75,.03);
+  border:1px solid rgba(200,168,75,.1);
+  display:flex;gap:10px;align-items:flex-start;
+  transition:border-color .3s,background .3s;
+}
+.pillar-card:hover{border-color:rgba(200,168,75,.3);background:rgba(200,168,75,.06);}
+.pillar-icon{font-size:1.3rem;margin-top:1px;flex-shrink:0;}
+.pillar-title{font-size:.85rem;font-weight:700;color:var(--text);margin-bottom:2px;}
+.pillar-text{font-size:.75rem;color:var(--muted);line-height:1.5;}
+
+/* ==================== GRADES SECTION ==================== */
+.grades-section{background:var(--deep);}
+.grades-grid {
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:2px;
+  background:rgba(200,168,75,.07);
+  border:1px solid rgba(200,168,75,.1);
+}
+.grade-card {
+  background:var(--dark2);padding:2.5rem 1.5rem;
+  text-align:center;position:relative;overflow:hidden;
+  transition:all .4s;cursor:pointer;
+}
+.grade-card::before {
+  content:'';position:absolute;bottom:0;left:0;right:0;height:3px;
+  background:var(--gc,var(--gold));transform:scaleX(0);
+  transition:transform .4s;
+}
+.grade-card:hover{background:var(--dark4);transform:translateY(-8px);}
+.grade-card:hover::before{transform:scaleX(1);}
+.grade-card:hover .grade-icon{transform:scale(1.2) rotate(-5deg);}
+.grade-icon{font-size:2.5rem;display:block;margin-bottom:1rem;transition:transform .3s;}
+.grade-name{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:.4rem;}
+.grade-years{font-size:.7rem;color:var(--muted);letter-spacing:.05em;}
+.grade-count{
+  display:inline-block;margin-top:.8rem;
+  padding:.2rem .7rem;font-size:.68rem;
+  background:rgba(200,168,75,.08);color:var(--gold);
+  border:1px solid rgba(200,168,75,.15);
+}
+
+/* ==================== PROGRAMS LUXURY ==================== */
+.programs-section{background:var(--dark1);overflow:hidden;}
+.programs-featured {
+  display:grid;grid-template-columns:1.5fr 1fr;gap:2px;
+  background:rgba(200,168,75,.06);margin-bottom:2px;
+}
+.prog-card {
+  padding:4rem 3rem;background:var(--dark2);
+  position:relative;overflow:hidden;cursor:pointer;
+  transition:background .4s;
+}
+.prog-card:hover{background:var(--dark4);}
+.prog-card-bg {
+  position:absolute;inset:0;opacity:.04;font-size:15rem;
+  display:flex;align-items:center;justify-content:center;
+  pointer-events:none;transition:opacity .4s,transform .4s;
+}
+.prog-card:hover .prog-card-bg{opacity:.07;transform:scale(1.05);}
+.prog-card-num {
+  font-family:'Playfair Display',serif;font-size:5rem;font-weight:900;
+  color:rgba(200,168,75,.06);line-height:1;margin-bottom:1.5rem;
+}
+.prog-card-icon{font-size:2.5rem;margin-bottom:1.5rem;display:block;}
+.prog-card-title{font-size:1.6rem;font-weight:800;color:var(--text);margin-bottom:.8rem;}
+.prog-card-desc{font-size:.9rem;color:var(--muted);line-height:1.8;font-weight:300;}
+.prog-card-link {
+  display:inline-flex;align-items:center;gap:.5rem;
+  margin-top:1.5rem;color:var(--gold);font-size:.82rem;
+  text-decoration:none;letter-spacing:.05em;
+  border-bottom:1px solid rgba(200,168,75,.2);padding-bottom:2px;
+  transition:gap .3s,border-color .3s;
+}
+.prog-card-link:hover{gap:1rem;border-color:var(--gold);}
+.prog-card-bottom {
+  display:grid;grid-template-columns:repeat(3,1fr);gap:2px;
+  background:rgba(200,168,75,.06);
+}
+
+/* ==================== FACILITIES ==================== */
+.facilities-section{background:var(--dark2);}
+.fac-grid {
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;
+}
+.fac-card {
+  padding:2.5rem 2rem;background:var(--dark3);
+  border:1px solid rgba(200,168,75,.08);
+  text-align:center;position:relative;overflow:hidden;
+  transition:all .4s;
+}
+.fac-card:hover{border-color:rgba(200,168,75,.25);transform:translateY(-5px);background:var(--dark4);}
+.fac-card::after {
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(200,168,75,.03),transparent);
+  opacity:0;transition:opacity .3s;
+}
+.fac-card:hover::after{opacity:1;}
+.fac-icon{font-size:2.8rem;margin-bottom:1.2rem;display:block;}
+.fac-title{font-size:1rem;font-weight:700;color:var(--text);margin-bottom:.6rem;}
+.fac-desc{font-size:.8rem;color:var(--muted);line-height:1.6;}
+
+/* ==================== ADMIN DEPARTMENTS ==================== */
+.admin-section{background:var(--deep);}
+.admin-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;}
+.admin-card {
+  background:var(--dark2);border:1px solid rgba(200,168,75,.1);
+  padding:0;overflow:hidden;position:relative;
+  transition:all .4s;cursor:pointer;text-decoration:none;display:block;
+}
+.admin-card:hover{border-color:rgba(200,168,75,.35);transform:translateY(-8px);box-shadow:0 20px 60px rgba(0,0,0,.4);}
+.admin-card-top {
+  padding:2.5rem 2.5rem 2rem;
+  position:relative;
+}
+.admin-card-top::before {
+  content:'';position:absolute;bottom:0;left:2.5rem;right:2.5rem;height:1px;
+  background:rgba(200,168,75,.1);
+}
+.admin-icon{font-size:2.5rem;margin-bottom:1.2rem;display:block;}
+.admin-title{font-size:1.15rem;font-weight:800;color:var(--text);margin-bottom:.5rem;}
+.admin-subtitle{font-size:.78rem;color:var(--gold);letter-spacing:.05em;margin-bottom:.7rem;}
+.admin-desc{font-size:.82rem;color:var(--muted);line-height:1.6;}
+.admin-card-bottom {
+  padding:1.2rem 2.5rem;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(200,168,75,.03);
+}
+.admin-more{font-size:.75rem;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;}
+.admin-arrow{color:var(--gold);font-size:1rem;transition:transform .3s;}
+.admin-card:hover .admin-arrow{transform:translateX(-5px);}
+
+/* ==================== NEWS SECTION ==================== */
+.news-section{background:var(--dark1);}
+.news-grid{display:grid;grid-template-columns:2fr 1fr;gap:2rem;}
+.news-main {
+  background:var(--dark2);border:1px solid rgba(200,168,75,.1);
+  overflow:hidden;cursor:pointer;transition:border-color .3s;
+}
+.news-main:hover{border-color:rgba(200,168,75,.3);}
+.news-main-img {
+  height:300px;background:linear-gradient(135deg,#12121E,#0C0C18);
+  position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;
+  font-size:6rem;color:rgba(200,168,75,.1);
+}
+.news-main-img::after {
+  content:'';position:absolute;bottom:0;left:0;right:0;height:60%;
+  background:linear-gradient(to top,var(--dark2),transparent);
+}
+.news-tag {
+  position:absolute;top:1.5rem;right:1.5rem;z-index:2;
+  background:var(--gold);color:var(--deep);
+  font-size:.65rem;font-weight:800;letter-spacing:.1em;
+  text-transform:uppercase;padding:.3rem .8rem;
+}
+.news-main-body{padding:2rem 2.5rem;}
+.news-date{font-size:.7rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.8rem;}
+.news-title{font-size:1.4rem;font-weight:800;color:var(--text);line-height:1.3;margin-bottom:.8rem;}
+.news-excerpt{font-size:.85rem;color:var(--muted);line-height:1.7;}
+.news-list{display:flex;flex-direction:column;gap:1rem;}
+.news-item {
+  background:var(--dark2);border:1px solid rgba(200,168,75,.08);
+  padding:1.5rem;cursor:pointer;transition:all .3s;display:flex;gap:1rem;
+}
+.news-item:hover{border-color:rgba(200,168,75,.25);background:var(--dark3);}
+.news-item-icon{font-size:1.8rem;flex-shrink:0;}
+.news-item-date{font-size:.65rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.3rem;}
+.news-item-title{font-size:.85rem;font-weight:600;color:var(--text);line-height:1.4;}
+
+/* ==================== TESTIMONIALS ==================== */
+.testi-section{background:var(--dark2);}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+.testi-card {
+  background:var(--dark3);border:1px solid rgba(200,168,75,.1);
+  padding:2.5rem;position:relative;transition:all .4s;
+}
+.testi-card:hover{border-color:rgba(200,168,75,.3);transform:translateY(-5px);}
+.testi-stars{color:var(--gold);font-size:1rem;margin-bottom:1.2rem;letter-spacing:.1em;}
+.testi-text{font-size:.88rem;color:var(--muted2);line-height:1.9;font-style:italic;font-weight:300;margin-bottom:1.8rem;}
+.testi-author{display:flex;align-items:center;gap:12px;}
+.testi-avatar {
+  width:46px;height:46px;border-radius:50%;
+  background:linear-gradient(135deg,var(--gold3),var(--gold));
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;color:var(--deep);font-size:.95rem;flex-shrink:0;
+}
+.testi-name{font-size:.88rem;font-weight:700;color:var(--text);}
+.testi-role{font-size:.72rem;color:var(--gold);margin-top:2px;opacity:.8;}
+.testi-quote-mark {
+  position:absolute;top:1.5rem;left:2rem;
+  font-family:'Playfair Display',serif;font-size:5rem;
+  color:rgba(200,168,75,.06);line-height:1;
+}
+
+/* ==================== CTA BANNER ==================== */
+.cta-banner {
+  background:var(--dark1);
+  border-top:1px solid rgba(200,168,75,.1);
+  border-bottom:1px solid rgba(200,168,75,.1);
+  padding:6rem 5%;text-align:center;position:relative;overflow:hidden;
+}
+.cta-banner::before {
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 80% at 50% 50%,rgba(200,168,75,.05),transparent);
+}
+.cta-inner{position:relative;max-width:700px;margin:0 auto;}
+.cta-title{font-size:clamp(2rem,4vw,3.5rem);font-weight:900;color:var(--text);line-height:1.1;margin-bottom:1.2rem;}
+.cta-sub{font-size:1rem;color:var(--muted);line-height:1.7;margin-bottom:2.5rem;}
+
+/* ==================== FOOTER ==================== */
+footer {
+  background:#030305;
+  border-top:1px solid rgba(200,168,75,.1);
+  padding:5rem 5% 2.5rem;
+}
+.footer-grid {
+  max-width:1280px;margin:0 auto;
+  display:grid;grid-template-columns:2.5fr 1fr 1fr 1fr 1fr;
+  gap:3rem;margin-bottom:4rem;
+  padding-bottom:4rem;
+  border-bottom:1px solid rgba(200,168,75,.07);
+}
+.footer-brand-logo{display:flex;align-items:center;gap:12px;text-decoration:none;margin-bottom:1.2rem;}
+.footer-desc{font-size:.82rem;color:var(--muted);line-height:1.8;margin-bottom:1.5rem;}
+.footer-social{display:flex;gap:.7rem;}
+.social-btn {
+  width:36px;height:36px;border:1px solid rgba(200,168,75,.2);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--muted);font-size:.9rem;text-decoration:none;
+  transition:all .3s;
+}
+.social-btn:hover{border-color:var(--gold);color:var(--gold);background:rgba(200,168,75,.06);}
+.footer-col h4{font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;font-weight:700;}
+.footer-col ul{list-style:none;}
+.footer-col li{margin-bottom:.8rem;}
+.footer-col a {
+  text-decoration:none;color:var(--muted);font-size:.82rem;
+  transition:color .3s;display:flex;align-items:center;gap:6px;
+}
+.footer-col a:hover{color:var(--gold);}
+.footer-col a::before{content:'›';color:var(--gold3);opacity:.6;}
+.footer-bottom {
+  max-width:1280px;margin:0 auto;
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:.75rem;color:var(--muted);flex-wrap:wrap;gap:.5rem;
+}
+.footer-bottom a{color:var(--gold);text-decoration:none;}
+
+/* ==================== ANIMATIONS ==================== */
+@keyframes fade-up {
+  from{opacity:0;transform:translateY(30px);}
+  to{opacity:1;transform:translateY(0);}
+}
+@keyframes fade-down {
+  from{opacity:0;transform:translateY(-20px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+.reveal {
+  opacity:0;transform:translateY(40px);
+  transition:opacity .8s ease,transform .8s ease;
+}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-left {
+  opacity:0;transform:translateX(-40px);
+  transition:opacity .8s ease,transform .8s ease;
+}
+.reveal-left.visible{opacity:1;transform:translateX(0);}
+.reveal-right {
+  opacity:0;transform:translateX(40px);
+  transition:opacity .8s ease,transform .8s ease;
+}
+.reveal-right.visible{opacity:1;transform:translateX(0);}
+
+/* ==================== MOBILE ==================== */
+@media(max-width:1024px){
+  .grades-grid{grid-template-columns:repeat(3,1fr);}
+  .fac-grid{grid-template-columns:repeat(2,1fr);}
+  .footer-grid{grid-template-columns:1fr 1fr;}
+  .programs-featured{grid-template-columns:1fr;}
+  .prog-card-bottom{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:768px){
+  .nav-menu{display:none;}
+  .hamburger{display:flex;}
+  .about-grid{grid-template-columns:1fr;}
+  .admin-grid{grid-template-columns:1fr;}
+  .testi-grid{grid-template-columns:1fr;}
+  .news-grid{grid-template-columns:1fr;}
+  .grades-grid{grid-template-columns:repeat(2,1fr);}
+  .hero-stats-row .hero-stat{border-right:none;border-bottom:1px solid rgba(200,168,75,.1);}
+  .footer-grid{grid-template-columns:1fr;}
+  .footer-bottom{flex-direction:column;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- PRELOADER -->
+<div id="preloader">
+  <div class="preloader-emblem">أ</div>
+  <div class="preloader-bar"><div class="preloader-fill"></div></div>
+  <div class="preloader-text">مدرسة الأهلية · يُحمّل</div>
+</div>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <div class="logo-ring">أ</div>
+    <div>
+      <div class="logo-name">الأهلية</div>
+      <div class="logo-tagline">Al-Ahlia School · Est. 1995</div>
+    </div>
+  </a>
+
+  <ul class="nav-menu">
+    <li><a href="index.html" class="active">الرئيسية</a></li>
+    <li class="has-dropdown">
+      <a href="#">عن المدرسة ▾</a>
+      <div class="dropdown">
+        <a href="admin.html">الإدارة العامة</a>
+        <a href="#">رسالة المدرسة</a>
+        <a href="#">الهيئة التدريسية</a>
+        <a href="#">الإنجازات</a>
+      </div>
+    </li>
+    <li class="has-dropdown">
+      <a href="#">الأقسام ▾</a>
+      <div class="dropdown">
+        <a href="#">قسم الروضة</a>
+        <a href="#">قسم الابتدائي</a>
+        <a href="#">قسم المتوسط</a>
+        <a href="#">قسم الثانوي</a>
+        <a href="#">التوجيهي / التوجيه</a>
+      </div>
+    </li>
+    <li><a href="#">الأنشطة</a></li>
+    <li><a href="#">الأخبار</a></li>
+    <li><a href="#">تواصل</a></li>
+    <li><a href="admin.html" class="nav-cta">الإدارة</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+  <div class="hero-bg-layer"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="hero-particles" id="particles"></div>
+
+  <div class="hero-rings">
+    <div class="hero-ring" style="width:600px;height:600px;--speed:60s;"></div>
+    <div class="hero-ring" style="width:900px;height:900px;--speed:90s;animation-direction:reverse;"></div>
+    <div class="hero-ring" style="width:1200px;height:1200px;--speed:120s;"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-year-badge">رائدة التعليم · منذ ١٩٩٥ · الأردن</div>
+    <h1 class="hero-title">
+      مدرسة الأهلية
+      <span class="hero-title-en">Al-Ahlia School of Excellence</span>
+    </h1>
+    <div class="hero-ornament-line">
+      <div class="orn-line"></div>
+      <div class="orn-diamond"></div>
+      <div class="orn-line r"></div>
+    </div>
+    <p class="hero-desc">صرحٌ تعليمي راسخ يُشكّل عقول قادة الغد، من رياض الأطفال حتى التوجيهي — بيئة أكاديمية استثنائية تجمع الأصالة بالتجديد في رحلة تعلّم لا تُنسى.</p>
+    <div class="hero-actions">
+      <a href="#grades" class="btn-gold">استكشف مراحلنا</a>
+      <a href="admin.html" class="btn-ghost">الإدارة العامة</a>
+    </div>
+    <div class="hero-stats-row">
+      <div class="hero-stat">
+        <div class="hero-stat-num" data-count="4200">٠</div>
+        <div class="hero-stat-label">طالب وطالبة</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">٩٨٪</div>
+        <div class="hero-stat-label">نسبة النجاح</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num" data-count="220">٠</div>
+        <div class="hero-stat-label">معلم متخصص</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">٢٩</div>
+        <div class="hero-stat-label">عاماً من التميّز</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num" data-count="15">٠</div>
+        <div class="hero-stat-label">جائزة وطنية</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-cue">
+    <span>تمرير</span>
+    <div class="scroll-cue-line"></div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track" id="tickerTrack">
+    <span class="ticker-item">التسجيل مفتوح للعام ٢٠٢٥-٢٠٢٦</span>
+    <span class="ticker-item">حفل تخرج الدفعة ٢٩ · ١٥ يونيو</span>
+    <span class="ticker-item">منتخب المدرسة يفوز بالبطولة الوطنية</span>
+    <span class="ticker-item">أسبوع العلوم والابتكار · ٢٠ مارس</span>
+    <span class="ticker-item">نتائج التوجيهي · ٩٨٪ نجاح</span>
+    <span class="ticker-item">افتتاح مختبر الذكاء الاصطناعي الجديد</span>
+    <span class="ticker-item">التسجيل مفتوح للعام ٢٠٢٥-٢٠٢٦</span>
+    <span class="ticker-item">حفل تخرج الدفعة ٢٩ · ١٥ يونيو</span>
+    <span class="ticker-item">منتخب المدرسة يفوز بالبطولة الوطنية</span>
+    <span class="ticker-item">أسبوع العلوم والابتكار · ٢٠ مارس</span>
+    <span class="ticker-item">نتائج التوجيهي · ٩٨٪ نجاح</span>
+    <span class="ticker-item">افتتاح مختبر الذكاء الاصطناعي الجديد</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about-section section" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-visual-wrap reveal-left">
+        <div class="about-main-visual">
+          <div class="corner-accent ca-tl"></div>
+          <div class="corner-accent ca-br"></div>
+          <div class="about-visual-overlay"></div>
+          <div class="about-visual-icon">🏛️</div>
+          <div class="about-visual-quote">"العلم نورٌ يُضيء طريق الأمم<br>ويصنع أبطال الغد"</div>
+        </div>
+        <div class="about-badge-medal"><strong>١</strong>الأفضل<br>وطنياً</div>
+        <div class="floating-cert">
+          <div class="cert-icon">🏆</div>
+          <div class="cert-title">معتمدة دولياً</div>
+          <div class="cert-sub">ISO · IB · Cambridge</div>
+        </div>
+      </div>
+      <div class="reveal-right">
+        <div class="section-head">
+          <span class="badge-label">عن مدرستنا</span>
+          <h2 class="section-title">نُربّي القادة<br><span class="gold-word">لا نعلّم الطلاب فقط</span></h2>
+          <div class="gold-divider"></div>
+          <p class="section-sub">منذ عام ١٩٩٥، تُجسّد مدرسة الأهلية نموذجاً تعليمياً فريداً يُدمج القيم الأصيلة بأحدث المناهج العالمية. نُؤمن بأن كل طالب يحمل بداخله بذرة عبقرية تنتظر من يُرعيها بحكمة وحب.</p>
+        </div>
+        <div class="about-pillars">
+          <div class="pillar-card"><span class="pillar-icon">🌟</span><div><div class="pillar-title">رؤية استشرافية</div><div class="pillar-text">مناهج تُعدّ الطلاب لعالم ٢٠٥٠</div></div></div>
+          <div class="pillar-card"><span class="pillar-icon">🤝</span><div><div class="pillar-title">بيئة داعمة</div><div class="pillar-text">نسبة ١:١٥ معلم لكل طلاب</div></div></div>
+          <div class="pillar-card"><span class="pillar-icon">🔬</span><div><div class="pillar-title">بحث وابتكار</div><div class="pillar-text">مختبرات ذكاء اصطناعي وروبوتيكس</div></div></div>
+          <div class="pillar-card"><span class="pillar-icon">🌍</span><div><div class="pillar-title">انفتاح عالمي</div><div class="pillar-text">برامج تبادل مع ١٢ دولة</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GRADES -->
+<section class="grades-section section" id="grades">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="badge-label">المراحل الدراسية</span>
+      <h2 class="section-title">من <span class="gold-word">الروضة إلى التوجيهي</span></h2>
+      <div class="gold-divider center"></div>
+      <p class="section-sub wide" style="margin:0 auto;">رحلة تعليمية متكاملة تمتد ١٤ عاماً من رياض الأطفال حتى اجتياز امتحانات التوجيهي بتفوق.</p>
+    </div>
+    <div class="grades-grid reveal">
+      <div class="grade-card" style="--gc:#9B59B6;">
+        <span class="grade-icon">🌈</span>
+        <div class="grade-name">رياض الأطفال</div>
+        <div class="grade-years">٣ – ٥ سنوات</div>
+        <div class="grade-count">٦ شعب</div>
+      </div>
+      <div class="grade-card" style="--gc:#3498DB;">
+        <span class="grade-icon">📖</span>
+        <div class="grade-name">الصف الأول</div>
+        <div class="grade-years">المرحلة الأساسية</div>
+        <div class="grade-count">٤ شعب</div>
+      </div>
+      <div class="grade-card" style="--gc:#2ECC71;">
+        <span class="grade-icon">✏️</span>
+        <div class="grade-name">الصف الرابع</div>
+        <div class="grade-years">المرحلة الأساسية</div>
+        <div class="grade-count">٤ شعب</div>
+      </div>
+      <div class="grade-card" style="--gc:#E67E22;">
+        <span class="grade-icon">🔭</span>
+        <div class="grade-name">الصف السابع</div>
+        <div class="grade-years">المرحلة المتوسطة</div>
+        <div class="grade-count">٤ شعب</div>
+      </div>
+      <div class="grade-card" style="--gc:#C8A84B;">
+        <span class="grade-icon">📐</span>
+        <div class="grade-name">الصف العاشر</div>
+        <div class="grade-years">المرحلة الثانوية</div>
+        <div class="grade-count">٣ شعب</div>
+      </div>
+      <div class="grade-card" style="--gc:#E74C3C;">
+        <span class="grade-icon">🎓</span>
+        <div class="grade-name">التوجيهي</div>
+        <div class="grade-years">الصف الثاني عشر</div>
+        <div class="grade-count">علمي · أدبي</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMS -->
+<section class="programs-section section" id="programs">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="badge-label">برامجنا المتميزة</span>
+      <h2 class="section-title">تعليم يتجاوز<br><span class="gold-word">حدود المنهج</span></h2>
+      <div class="gold-divider center"></div>
+    </div>
+    <div class="programs-featured reveal">
+      <div class="prog-card">
+        <div class="prog-card-bg">🤖</div>
+        <div class="prog-card-num">٠١</div>
+        <span class="prog-card-icon">🤖</span>
+        <h3 class="prog-card-title">الذكاء الاصطناعي والروبوتيكس</h3>
+        <p class="prog-card-desc">برنامج متكامل لتعلّم البرمجة والذكاء الاصطناعي والروبوتيكس لطلاب الصفوف ٦-١٢. يُشارك طلابنا في المسابقات الدولية ويحصدون الجوائز العالمية.</p>
+        <a href="#" class="prog-card-link">تعرف على البرنامج ←</a>
+      </div>
+      <div class="prog-card">
+        <div class="prog-card-bg">🌍</div>
+        <div class="prog-card-num">٠٢</div>
+        <span class="prog-card-icon">🌍</span>
+        <h3 class="prog-card-title">برنامج اللغات العالمية</h3>
+        <p class="prog-card-desc">إتقان العربية والإنجليزية مع خيار الفرنسية والمندرين. معلمون أصحاب لغة أم ومناهج كامبريدج المعتمدة دولياً.</p>
+        <a href="#" class="prog-card-link">تعرف على البرنامج ←</a>
+      </div>
+    </div>
+    <div class="prog-card-bottom reveal">
+      <div class="prog-card">
+        <span class="prog-card-icon">🎨</span>
+        <h3 class="prog-card-title" style="font-size:1.1rem;">الفنون والإبداع</h3>
+        <p class="prog-card-desc" style="font-size:.82rem;">موسيقى، فنون بصرية، مسرح، تصوير.</p>
+      </div>
+      <div class="prog-card">
+        <span class="prog-card-icon">⚽</span>
+        <h3 class="prog-card-title" style="font-size:1.1rem;">الرياضة والقيادة</h3>
+        <p class="prog-card-desc" style="font-size:.82rem;">أكاديميات رياضية وبرامج قيادية متكاملة.</p>
+      </div>
+      <div class="prog-card">
+        <span class="prog-card-icon">🔬</span>
+        <h3 class="prog-card-title" style="font-size:1.1rem;">بحث علمي متقدم</h3>
+        <p class="prog-card-desc" style="font-size:.82rem;">مشاريع بحثية حقيقية بإشراف أكاديميين.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FACILITIES -->
+<section class="facilities-section section" id="facilities">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="badge-label">بيئتنا التعليمية</span>
+      <h2 class="section-title">مرافق<span class="gold-word"> استثنائية</span></h2>
+      <div class="gold-divider center"></div>
+    </div>
+    <div class="fac-grid">
+      <div class="fac-card reveal"><span class="fac-icon">🔬</span><div class="fac-title">مختبرات العلوم</div><div class="fac-desc">٦ مختبرات مجهزة بأحدث التقنيات للكيمياء والفيزياء والأحياء</div></div>
+      <div class="fac-card reveal"><span class="fac-icon">💻</span><div class="fac-title">مختبر التقنية</div><div class="fac-desc">١٢٠ حاسوب بمعالجات عالية مع اشتراكات Adobe وMicrosoft</div></div>
+      <div class="fac-card reveal"><span class="fac-icon">📚</span><div class="fac-title">المكتبة الرقمية</div><div class="fac-desc">٥٠٠٠٠ كتاب ورقي ورقمي مع قاعدة بيانات JSTOR وEBSCO</div></div>
+      <div class="fac-card reveal"><span class="fac-icon">🏟️</span><div class="fac-title">الملاعب الرياضية</div><div class="fac-desc">ملعب كرة قدم نجيل صناعي، ملعب السلة، المسبح الأولمبي</div></div>
+      <div class="fac-card reveal"><span class="fac-icon">🎭</span><div class="fac-title">قاعة المسرح</div><div class="fac-desc">مسرح بسعة ٨٠٠ مقعد مجهز لكبرى العروض والمؤتمرات</div></div>
+      <div class="fac-card reveal"><span class="fac-icon">🍽️</span><div class="fac-title">الكافيتيريا</div><div class="fac-desc">وجبات صحية مُعدّة من قِبل خبراء تغذية متخصصين</div></div>
+      <div class="fac-card reveal"><span class="fac-icon">🎨</span><div class="fac-title">استوديو الفنون</div><div class="fac-desc">استوديوهات مخصصة للرسم والنحت والتصوير الفوتوغرافي</div></div>
+      <div class="fac-card reveal"><span class="fac-icon">🤖</span><div class="fac-title">مختبر الروبوتيكس</div><div class="fac-desc">أحدث منصات الروبوت وطابعات ثلاثية الأبعاد ومعدات VR</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ADMIN DEPARTMENTS -->
+<section class="admin-section section" id="departments">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="badge-label">هيكلنا الإداري</span>
+      <h2 class="section-title">الأقسام<span class="gold-word"> الإدارية</span></h2>
+      <div class="gold-divider center"></div>
+      <p class="section-sub wide" style="margin:0 auto;">كل قسم يعمل بكفاءة عالية لضمان أفضل تجربة تعليمية للطلاب والأهالي.</p>
+    </div>
+    <div class="admin-grid">
+      <a href="admin.html" class="admin-card reveal">
+        <div class="admin-card-top">
+          <span class="admin-icon">👑</span>
+          <div class="admin-title">الإدارة العامة</div>
+          <div class="admin-subtitle">General Management</div>
+          <div class="admin-desc">رؤية قيادية شاملة تُشرف على جميع جوانب المؤسسة التعليمية وتضمن تحقيق الأهداف الاستراتيجية.</div>
+        </div>
+        <div class="admin-card-bottom">
+          <span class="admin-more">الدخول للقسم</span>
+          <span class="admin-arrow">←</span>
+        </div>
+      </a>
+      <a href="#" class="admin-card reveal">
+        <div class="admin-card-top">
+          <span class="admin-icon">📋</span>
+          <div class="admin-title">الشؤون الأكاديمية</div>
+          <div class="admin-subtitle">Academic Affairs</div>
+          <div class="admin-desc">تشرف على المناهج والجداول الدراسية وتطوير أساليب التدريس وتقييم الأداء الأكاديمي.</div>
+        </div>
+        <div class="admin-card-bottom">
+          <span class="admin-more">الدخول للقسم</span>
+          <span class="admin-arrow">←</span>
+        </div>
+      </a>
+      <a href="#" class="admin-card reveal">
+        <div class="admin-card-top">
+          <span class="admin-icon">👨‍👩‍👧</span>
+          <div class="admin-title">شؤون الطلاب</div>
+          <div class="admin-subtitle">Student Affairs</div>
+          <div class="admin-desc">رعاية شاملة للطالب من التسجيل حتى التخرج، تشمل الإرشاد النفسي والتوجيه المهني.</div>
+        </div>
+        <div class="admin-card-bottom">
+          <span class="admin-more">الدخول للقسم</span>
+          <span class="admin-arrow">←</span>
+        </div>
+      </a>
+      <a href="#" class="admin-card reveal">
+        <div class="admin-card-top">
+          <span class="admin-icon">💰</span>
+          <div class="admin-title">الشؤون المالية</div>
+          <div class="admin-subtitle">Financial Affairs</div>
+          <div class="admin-desc">إدارة الرسوم والمنح والخدمات المالية للأسر، مع تيسير خطط الدفع المرنة.</div>
+        </div>
+        <div class="admin-card-bottom">
+          <span class="admin-more">الدخول للقسم</span>
+          <span class="admin-arrow">←</span>
+        </div>
+      </a>
+      <a href="#" class="admin-card reveal">
+        <div class="admin-card-top">
+          <span class="admin-icon">🏗️</span>
+          <div class="admin-title">الخدمات والصيانة</div>
+          <div class="admin-subtitle">Facilities Management</div>
+          <div class="admin-desc">الحفاظ على بيئة آمنة ومريحة وحديثة لكل أبناء الأسرة التعليمية على مدار الساعة.</div>
+        </div>
+        <div class="admin-card-bottom">
+          <span class="admin-more">الدخول للقسم</span>
+          <span class="admin-arrow">←</span>
+        </div>
+      </a>
+      <a href="#" class="admin-card reveal">
+        <div class="admin-card-top">
+          <span class="admin-icon">📡</span>
+          <div class="admin-title">تقنية المعلومات</div>
+          <div class="admin-subtitle">Information Technology</div>
+          <div class="admin-desc">دعم تقني متكامل للبنية التحتية الرقمية ومنصة التعلم الإلكتروني والأنظمة الإدارية.</div>
+        </div>
+        <div class="admin-card-bottom">
+          <span class="admin-more">الدخول للقسم</span>
+          <span class="admin-arrow">←</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- NEWS -->
+<section class="news-section section" id="news">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="badge-label">آخر الأخبار</span>
+      <h2 class="section-title">نبضات<span class="gold-word"> الأهلية</span></h2>
+      <div class="gold-divider"></div>
+    </div>
+    <div class="news-grid">
+      <div class="news-main reveal-left">
+        <div class="news-main-img">📰<div class="news-tag">عاجل</div></div>
+        <div class="news-main-body">
+          <div class="news-date">١٢ مارس ٢٠٢٥</div>
+          <h3 class="news-title">مدرسة الأهلية تفتتح مختبر الذكاء الاصطناعي الأضخم في المنطقة</h3>
+          <p class="news-excerpt">في حفل رسمي حضره وزير التربية والتعليم وعدد من المسؤولين، افتتحت مدرسة الأهلية اليوم مختبر الذكاء الاصطناعي الأكثر تطوراً في المنطقة، بمساحة ٨٠٠ متر مربع ومجهز بأحدث التقنيات العالمية.</p>
+        </div>
+      </div>
+      <div class="news-list reveal-right">
+        <div class="news-item">
+          <div class="news-item-icon">🏆</div>
+          <div><div class="news-item-date">٥ مارس ٢٠٢٥</div><div class="news-item-title">فريق الروبوتيكس يفوز بالمركز الأول في البطولة الدولية بسنغافورة</div></div>
+        </div>
+        <div class="news-item">
+          <div class="news-item-icon">🎓</div>
+          <div><div class="news-item-date">١ مارس ٢٠٢٥</div><div class="news-item-title">٩٨٪ نسبة نجاح التوجيهي وثلاثة طلاب يحققون علامة كاملة</div></div>
+        </div>
+        <div class="news-item">
+          <div class="news-item-icon">🌍</div>
+          <div><div class="news-item-date">٢٠ فبراير ٢٠٢٥</div><div class="news-item-title">توقيع اتفاقية تبادل طلابي مع مدرسة هارو لندن البريطانية</div></div>
+        </div>
+        <div class="news-item">
+          <div class="news-item-icon">🎨</div>
+          <div><div class="news-item-date">١٠ فبراير ٢٠٢٥</div><div class="news-item-title">معرض الفنون السنوي يستقطب ٢٠٠٠ زائر في يومه الأول</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi-section section" id="testimonials">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="badge-label">أصوات مجتمعنا</span>
+      <h2 class="section-title">ماذا يقول<span class="gold-word"> أهالينا وخريجونا</span></h2>
+      <div class="gold-divider center"></div>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <div class="testi-quote-mark">"</div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">منذ أن التحق أبني بمدرسة الأهلية، شهدت تحولاً حقيقياً في شخصيته ومستواه الأكاديمي. المعلمون هنا ليسوا مجرد مدرسين، هم مرشدون وملهمون حقيقيون.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">خ</div>
+          <div><div class="testi-name">خالد المحمود</div><div class="testi-role">ولي أمر · صف تاسع</div></div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-quote-mark">"</div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">الأهلية ليست مدرسة، هي تجربة حياة. خرجت منها بقيم راسخة ومهارات عملية وصداقات عمر. حصلت على منحة في جامعة أكسفورد بفضل ما تعلمته هنا.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">ن</div>
+          <div><div class="testi-name">نور الهاشمي</div><div class="testi-role">خريجة ٢٠٢٣ · أكسفورد</div></div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-quote-mark">"</div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">ابنتي في الروضة وكل يوم تعود مليئة بالحيوية والأفكار. الطريقة التي يُدار بها هذا القسم تُشعرك أنهم يُحبون أطفالنا كأطفالهم.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">س</div>
+          <div><div class="testi-name">سمر العبادي</div><div class="testi-role">ولية أمر · روضة</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-banner">
+  <div class="cta-inner reveal">
+    <span class="badge-label" style="justify-content:center;">التسجيل مفتوح الآن</span>
+    <h2 class="cta-title">ابدأ رحلة <span class="gold-word">الأهلية</span><br>اليوم</h2>
+    <p class="cta-sub">أماكن محدودة لضمان جودة التعليم · الأولوية للمسجلين مبكراً · منح جزئية للمتفوقين</p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <a href="#" class="btn-gold">سجّل ابنك الآن</a>
+      <a href="admin.html" class="btn-ghost">تواصل مع الإدارة</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <a href="index.html" class="footer-brand-logo">
+        <div class="logo-ring">أ</div>
+        <div><div class="logo-name">الأهلية</div><div class="logo-tagline">Al-Ahlia School</div></div>
+      </a>
+      <p class="footer-desc">مؤسسة تعليمية رائدة منذ ١٩٩٥، تُشكّل عقول قادة المستقبل بتعليم يجمع الأصالة والتجديد في بيئة أكاديمية استثنائية.</p>
+      <div class="footer-social">
+        <a href="#" class="social-btn">f</a>
+        <a href="#" class="social-btn">t</a>
+        <a href="#" class="social-btn">in</a>
+        <a href="#" class="social-btn">yt</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>المدرسة</h4>
+      <ul>
+        <li><a href="#">عن الأهلية</a></li>
+        <li><a href="#">رسالتنا ورؤيتنا</a></li>
+        <li><a href="#">الهيئة التدريسية</a></li>
+        <li><a href="#">الإنجازات</a></li>
+        <li><a href="#">تقارير سنوية</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>الأقسام</h4>
+      <ul>
+        <li><a href="#">الروضة</a></li>
+        <li><a href="#">الابتدائي</a></li>
+        <li><a href="#">المتوسط</a></li>
+        <li><a href="#">الثانوي</a></li>
+        <li><a href="#">التوجيهي</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>خدمات</h4>
+      <ul>
+        <li><a href="#">بوابة الطالب</a></li>
+        <li><a href="#">بوابة ولي الأمر</a></li>
+        <li><a href="#">نظام المكتبة</a></li>
+        <li><a href="#">التعلم عن بُعد</a></li>
+        <li><a href="#">نتائج الامتحانات</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>تواصل</h4>
+      <ul>
+        <li><a href="#">📞 06-5xxxxxx</a></li>
+        <li><a href="#">📧 info@ahlia.edu.jo</a></li>
+        <li><a href="#">📍 عمّان، الأردن</a></li>
+        <li><a href="#">التسجيل</a></li>
+        <li><a href="#">وظائف شاغرة</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© ٢٠٢٥ مدرسة <a href="#">الأهلية</a> · جميع الحقوق محفوظة</span>
+    <span>سياسة الخصوصية · شروط الاستخدام</span>
+  </div>
+</footer>
+
+<script>
+// PRELOADER
+window.addEventListener('load',()=>{
+  setTimeout(()=>{
+    document.getElementById('preloader').classList.add('hide');
+  },2200);
+});
+
+// CUSTOM CURSOR
+const cursor=document.getElementById('cursor');
+const ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  cursor.style.left=mx+'px';cursor.style.top=my+'px';
+});
+function animRing(){
+  rx+=(mx-rx)*.12;ry+=(my-ry)*.12;
+  ring.style.left=rx+'px';ring.style.top=ry+'px';
+  requestAnimationFrame(animRing);
+}
+animRing();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{
+    cursor.style.width='20px';cursor.style.height='20px';
+    ring.style.width='60px';ring.style.height='60px';
+  });
+  el.addEventListener('mouseleave',()=>{
+    cursor.style.width='12px';cursor.style.height='12px';
+    ring.style.width='36px';ring.style.height='36px';
+  });
+});
+
+// NAVBAR SCROLL
+const navbar=document.getElementById('navbar');
+window.addEventListener('scroll',()=>{
+  navbar.classList.toggle('scrolled',window.scrollY>80);
+});
+
+// PARTICLES
+const pCont=document.getElementById('particles');
+for(let i=0;i<40;i++){
+  const p=document.createElement('div');
+  p.className='particle';
+  p.style.cssText=`left:${Math.random()*100}%;bottom:${Math.random()*40}%;--dur:${3+Math.random()*6}s;--delay:${Math.random()*5}s;--op:${.2+Math.random()*.5};`;
+  pCont.appendChild(p);
+}
+
+// REVEAL
+const revealEls=document.querySelectorAll('.reveal,.reveal-left,.reveal-right');
+const obs=new IntersectionObserver((entries)=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting){
+      setTimeout(()=>e.target.classList.add('visible'),i*80);
+      obs.unobserve(e.target);
+    }
+  });
+},{threshold:.1});
+revealEls.forEach(el=>obs.observe(el));
+
+// COUNTER
+document.querySelectorAll('[data-count]').forEach(el=>{
+  const target=parseInt(el.dataset.count);
+  const io=new IntersectionObserver(([entry])=>{
+    if(entry.isIntersecting){
+      let start=0,duration=2000,startTime=null;
+      const step=ts=>{
+        if(!startTime)startTime=ts;
+        const p=Math.min((ts-startTime)/duration,1);
+        const eased=1-Math.pow(1-p,3);
+        el.textContent=Math.floor(eased*target).toLocaleString('ar');
+        if(p<1)requestAnimationFrame(step);
+        else el.textContent='+'+target.toLocaleString('ar');
+      };
+      requestAnimationFrame(step);
+      io.unobserve(el);
+    }
+  });
+  io.observe(el);
+});
+</script>
+</body>
+</html>
